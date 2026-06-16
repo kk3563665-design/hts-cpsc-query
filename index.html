@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>立派国际物流CPSC合规查询</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #f0f4f8;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    padding: 48px 56px;
+    max-width: 560px;
+    width: 90%;
+    text-align: center;
+  }
+  .card h1 {
+    font-size: 26px;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+  .card p {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 32px;
+  }
+  .links { display: flex; flex-direction: column; gap: 16px; }
+  .link-item {
+    display: block;
+    padding: 20px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1.5px solid #e2e8f0;
+  }
+  .link-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(37,99,235,0.15);
+    border-color: #2563eb;
+  }
+  .link-item .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 4px;
+  }
+  .link-item .desc {
+    font-size: 13px;
+    color: #64748b;
+  }
+  .link-item .arrow {
+    float: right;
+    font-size: 18px;
+    color: #94a3b8;
+    margin-top: 2px;
+  }
+  .link-primary {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border-color: #93c5fd;
+  }
+  .link-primary:hover { border-color: #2563eb; background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>立派国际物流CPSC合规查询</h1>
+  <p>美国海关税则编码 · 关税税率 · 合规预警</p>
+  <div class="links">
+    <a class="link-item link-primary" href="hts-cpsc-122.html">
+      <span class="arrow">→</span>
+      <div class="title">HTS 税率查询（含122附加税）</div>
+      <div class="desc">含基础税率 + 301 + 232 + 122附加税，588 条记录</div>
+    </a>
+    <a class="link-item" href="hts-cpsc.html">
+      <span class="arrow">→</span>
+      <div class="title">HTS 税率查询（基础版）</div>
+      <div class="desc">含基础税率 + 301 + 232附加税 + 证书类型，588 条记录</div>
+    </a>
+  </div>
+</div>
+</body>
+</html>

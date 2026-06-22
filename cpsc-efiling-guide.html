@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPSC eFiling 合规指南 | 立派国际物流</title>
+<style>
+  :root {
+    --brand: #1a3c6e;
+    --brand-light: #2563eb;
+    --accent: #e84c3d;
+    --accent-light: #fef2f2;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --green-light: #ecfdf5;
+    --bg: #f0f4fa;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    background: linear-gradient(135deg, #0f2557 0%, #1a3c6e 50%, #1e50a2 100%);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  }
+  .header-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #e84c3d, #f97316);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: white;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .logo-text {
+    color: white;
+  }
+  .logo-text .main { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+  .logo-text .sub { font-size: 11px; color: rgba(255,255,255,0.65); letter-spacing: 2px; margin-top: 1px; }
+  .header-badge {
+    background: var(--accent);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(160deg, #0f2557 0%, #1a3c6e 40%, #1565c0 100%);
+    color: white;
+    padding: 60px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 250px; height: 250px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(232,76,61,0.2);
+    border: 1px solid rgba(232,76,61,0.4);
+    color: #fca5a5;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px;
+    background: #e84c3d;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  .hero h1 {
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 800;
+    line-height: 1.35;
+    max-width: 760px;
+    margin: 0 auto 20px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .hero h1 em { font-style: normal; color: #fbbf24; }
+  .hero-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.78);
+    max-width: 600px;
+    margin: 0 auto 32px;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+  .hero-meta-item svg { opacity: 0.6; }
+
+  /* ===== COUNTDOWN ===== */
+  .countdown-bar {
+    background: linear-gradient(90deg, #e84c3d, #f97316);
+    color: white;
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .countdown-num {
+    background: rgba(255,255,255,0.25);
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-size: 18px;
+    font-weight: 800;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  /* ===== LAYOUT ===== */
+  .main-content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ===== SECTION ===== */
+  .section {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--brand);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--brand);
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-title.red { color: var(--accent); }
+  .section-title.red .section-num { background: var(--accent); }
+
+  /* ===== HIGHLIGHT BOXES ===== */
+  .alert-box {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+  }
+  .alert-box.red { background: #fff1f1; border-left: 4px solid var(--accent); color: #991b1b; }
+  .alert-box.blue { background: #eff6ff; border-left: 4px solid var(--brand-light); color: #1e3a8a; }
+  .alert-box.green { background: var(--green-light); border-left: 4px solid var(--green); color: #065f46; }
+  .alert-box.yellow { background: #fffbeb; border-left: 4px solid var(--gold); color: #92400e; }
+  .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ===== KEY CHANGE CARDS ===== */
+  .change-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  @media (max-width: 600px) { .change-grid { grid-template-columns: 1fr; } }
+  .change-card {
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .change-card.before {
+    background: #fff8f8;
+    border-color: #fca5a5;
+  }
+  .change-card.after {
+    background: #f0fdf4;
+    border-color: #6ee7b7;
+  }
+  .change-card .tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .change-card.before .tag { background: #fca5a5; color: #7f1d1d; }
+  .change-card.after .tag { background: #6ee7b7; color: #064e3b; }
+  .change-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .change-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ===== CERT COMPARISON ===== */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  @media (max-width: 600px) { .cert-grid { grid-template-columns: 1fr; } }
+  .cert-card {
+    border-radius: 10px;
+    padding: 22px 24px;
+    border: 2px solid;
+  }
+  .cert-card.cpc { border-color: #7c3aed; background: #faf5ff; }
+  .cert-card.gcc { border-color: #0891b2; background: #f0f9ff; }
+  .cert-card .cert-label {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .cert-card.cpc .cert-label { color: #7c3aed; }
+  .cert-card.gcc .cert-label { color: #0891b2; }
+  .cert-card .cert-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+  .cert-card .cert-scope {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .cert-card ul { padding-left: 16px; }
+  .cert-card ul li { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* ===== PITFALL LIST ===== */
+  .pitfall-list { list-style: none; margin: 16px 0; }
+  .pitfall-item {
+    display: flex;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #fecaca;
+    background: #fff8f8;
+    align-items: flex-start;
+  }
+  .pitfall-num {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .pitfall-content h4 { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .pitfall-content p { font-size: 13px; color: #6b1111; line-height: 1.6; }
+
+  /* ===== CONSEQUENCE BOX ===== */
+  .consequence-box {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .consequence-box h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fca5a5;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .consequence-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .consequence-item {
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .consequence-item .icon { font-size: 24px; margin-bottom: 6px; }
+  .consequence-item p { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+  /* ===== ACTION STEPS ===== */
+  .steps-list { margin: 20px 0; }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .step-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-light));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .step-content { flex: 1; }
+  .step-content h4 { font-size: 15px; font-weight: 700; color: var(--brand); margin-bottom: 5px; }
+  .step-content p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .step-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+  }
+  .step-tag.urgent { background: #fef3c7; color: #92400e; }
+  .step-tag.important { background: #fee2e2; color: #991b1b; }
+
+  /* ===== SUMMARY BOX ===== */
+  .summary-box {
+    background: linear-gradient(135deg, var(--brand) 0%, #1e50a2 100%);
+    color: white;
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    margin-top: 32px;
+    text-align: center;
+  }
+  .summary-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+  .summary-box p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.8; max-width: 560px; margin: 0 auto 20px; }
+  .summary-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: var(--brand);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 24px;
+    border-radius: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #0f2557;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  footer strong { color: rgba(255,255,255,0.9); }
+
+  /* ===== EXAMPLE CARD ===== */
+  .example-card {
+    background: linear-gradient(135deg, #f8f9ff, #eef2ff);
+    border: 1px solid #c7d2fe;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 16px 0;
+  }
+  .example-card .ex-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #4338ca;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .example-card p { font-size: 13px; color: #3730a3; line-height: 1.7; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .section { padding: 24px 20px; }
+    .hero h1 { font-size: 20px; }
+    .main-content { padding: 24px 16px 60px; }
+    .header-inner { padding: 12px 16px; }
+    .logo-text .main { font-size: 15px; }
+    .summary-box { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-icon">立</div>
+      <div class="logo-text">
+        <div class="main">立派国际物流</div>
+        <div class="sub">LIPAI INTERNATIONAL LOGISTICS</div>
+      </div>
+    </div>
+    <div class="header-badge">⚡ 合规资讯</div>
+  </div>
+</header>
+
+<!-- COUNTDOWN BAR -->
+<div class="countdown-bar">
+  ⏰ &nbsp;美国 CPSC eFiling 强制执行日期：&nbsp;
+  <span class="countdown-num" id="daysLeft">--</span>
+  &nbsp;天后（2026年7月8日）正式落地
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">
+    <span class="dot"></span>
+    重要合规预警
+  </div>
+  <h1>倒计时！CPSC eFiling 强制落地<br><em>无电子备案将直接扣货！</em></h1>
+  <p class="hero-desc">亚马逊美线卖家、所有受监管进口消费品出口企业必读。2026年7月8日起，清关前必须完成 ACE 系统电子预审，过去的纸质证书时代彻底终结。</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      CPSC 官方法规依据
+    </div>
+    <div class="hero-meta-item">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      自贸区宽限至 2027.01.08
+    </div>
+    <div class="hero-meta-item">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      立派国际物流合规资讯整理
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+  <!-- SECTION 1: 核心变革 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="section-num">01</span>
+      新规核心变革：从事后抽查 → 事前强制电子预审
+    </div>
+    <p style="margin-bottom:16px; color: var(--muted);">
+      依据美国《消费品安全法案》CPSA 及 16 CFR 最新修订法规，<strong>2026年7月8日起</strong>，全部 CPSC 监管进口消费品，清关前必须完成 ACE 系统 eFiling 电子申报。自由贸易区货物宽限至 2027年1月8日执行。
+    </p>
+
+    <div class="change-grid">
+      <div class="change-card before">
+        <div class="tag">❌ 旧模式（已终结）</div>
+        <h4>事后抽查制度</h4>
+        <p>海关抽查到才需出示纸质证书，模板套证、事后应付，大量漏洞可钻。</p>
+      </div>
+      <div class="change-card after">
+        <div class="tag">✅ 新模式（强制执行）</div>
+        <h4>事前强制电子预审</h4>
+        <p>系统自动比对备案数据，货物到港无有效备案直接拒绝放行，零人工兜底。</p>
+      </div>
+    </div>
+
+    <div class="alert-box blue">
+      <div class="alert-icon">🔗</div>
+      <div>
+        <strong>全数据线上留档：</strong>亚马逊平台与 CPSC 官方系统数据互通，新品上架、月度抽检、季度复核双向校验，<strong>假证、套证 100% 筛查</strong>，无任何漏洞可钻。
+      </div>
+    </div>
+
+    <div class="alert-box red">
+      <div class="alert-icon">⚠️</div>
+      <div>
+        所有受监管产品分为两大独立合规体系，<strong>证书不可混用，错配直接备案失败</strong>：
+        CPC 儿童产品证书 与 GCC 一般合格证书。
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: CPC vs GCC -->
+  <div class="section">
+    <div class="section-title">
+      <span class="section-num">02</span>
+      一文分清 CPC vs GCC，别再证书错配踩大坑
+    </div>
+
+    <div class="cert-grid">
+      <div class="cert-card cpc">
+        <div class="cert-label">CPC 证书</div>
+        <div class="cert-sub">Children's Product Certificate — 儿童产品专用</div>
+        <div class="cert-scope">📌 适用范围：12岁及以下儿童产品</div>
+        <ul>
+          <li>儿童玩具、童装童鞋</li>
+          <li>婴儿床 / 奶嘴</li>
+          <li>儿童饰品、早教用品</li>
+          <li>童车、婴幼儿家纺</li>
+        </ul>
+        <div style="margin-top:14px; padding:10px 12px; background:rgba(124,58,237,0.08); border-radius:8px; font-size:12px; color:#5b21b6;">
+          <strong>必测项目：</strong>CPSIA 铅、邻苯二甲酸盐、镉含量、16CFR1610 儿童阻燃标准。报告、证书、备案数据三者必须完全一致。
+        </div>
+      </div>
+      <div class="cert-card gcc">
+        <div class="cert-label">GCC 证书</div>
+        <div class="cert-sub">General Certificate of Conformity — 成人消费品通用</div>
+        <div class="cert-scope">📌 适用范围：12岁以上成人消费品</div>
+        <ul>
+          <li>成人服饰、家用床垫家纺</li>
+          <li>户外用品、家居五金</li>
+          <li>塑料制品、成人运动器材</li>
+          <li>普通小家电配件</li>
+        </ul>
+        <div style="margin-top:14px; padding:10px 12px; background:rgba(8,145,178,0.08); border-radius:8px; font-size:12px; color:#075985;">
+          <strong>合规流程：</strong>检测出具英文报告 → 独立 GCC 证书 → 线上 eFiling 备案，同时满足海关清关、亚马逊双重审核要求。
+        </div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="ex-label">🔑 实际案例</div>
+      <p>同一款面料：做成<strong>童装 → 需要 CPC</strong>；做成<strong>成人睡衣 → 出具 GCC</strong>。两套证书不能通用，混用备案直接驳回，务必按产品使用人群严格区分。</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: 四大坑 -->
+  <div class="section">
+    <div class="section-title red">
+      <span class="section-num">03</span>
+      新规落地四大致命踩坑点，容错率归零
+    </div>
+
+    <div class="alert-box red">
+      <div class="alert-icon">🚨</div>
+      <div>以往低成本合规漏洞<strong>全部关闭</strong>，系统全自动数据比对，无人工兜底，以下问题务必提前规避：</div>
+    </div>
+
+    <ul class="pitfall-list">
+      <li class="pitfall-item">
+        <div class="pitfall-num">1</div>
+        <div class="pitfall-content">
+          <h4>空白模板证书彻底失效</h4>
+          <p>无 CPSC 认可实验室英文检测报告支撑的 CPC/GCC，无法录入 eFiling 系统，属于无效资质，清关直接拦截。</p>
+        </div>
+      </li>
+      <li class="pitfall-item">
+        <div class="pitfall-num">2</div>
+        <div class="pitfall-content">
+          <h4>一证多用、跨 SKU 套证行不通</h4>
+          <p>系统自动匹配产品型号、材质、工厂信息，证书与申报 SKU 参数不一致，判定备案失败，批量货物扣押。</p>
+        </div>
+      </li>
+      <li class="pitfall-item">
+        <div class="pitfall-num">3</div>
+        <div class="pitfall-content">
+          <h4>非英文、非正规报告直接驳回</h4>
+          <p>仅接受 CPSC 认可实验室出具英文测试文件，自制中文报告、第三方无资质报告全部无法通过系统校验。</p>
+        </div>
+      </li>
+      <li class="pitfall-item">
+        <div class="pitfall-num">4</div>
+        <div class="pitfall-content">
+          <h4>进口商主体信息不匹配</h4>
+          <p>证书标注进口商，必须与 ACE 系统申报 IOR 进口商完全统一，主体不符会触发长期平台复核、高额罚款。</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="consequence-box">
+      <h4>⚡ 违规严重后果</h4>
+      <div class="consequence-grid">
+        <div class="consequence-item">
+          <div class="icon">🚫</div>
+          <p>货物海关扣留<br>强制退运</p>
+        </div>
+        <div class="consequence-item">
+          <div class="icon">📦</div>
+          <p>亚马逊商品下架<br>链接封禁</p>
+        </div>
+        <div class="consequence-item">
+          <div class="icon">💰</div>
+          <p>单次最高罚款<br><strong style="color:#fca5a5;font-size:16px;">$120,000</strong></p>
+        </div>
+        <div class="consequence-item">
+          <div class="icon">🔒</div>
+          <p>纳入 CPSC 风险名单<br>长期限制进口</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: 行动清单 -->
+  <div class="section">
+    <div class="section-title">
+      <span class="section-num">04</span>
+      卖家行动清单——现在立刻执行
+    </div>
+
+    <div class="alert-box yellow">
+      <div class="alert-icon">⏳</div>
+      <div>距离7月8日<strong>不足3周</strong>，检测机构已进入爆单拥堵期。现在行动，每拖一天风险翻倍！</div>
+    </div>
+
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-icon">🔍</div>
+        <div class="step-content">
+          <h4>第一步：自查品类 <span class="step-tag important">立刻执行</span></h4>
+          <p>核对所有在售/在途产品，属于 CPC 儿童产品还是 GCC 成人消费品监管范围？分类不清先咨询，不要猜测。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">📋</div>
+        <div class="step-content">
+          <h4>第二步：锁定资质 <span class="step-tag important">核心关键</span></h4>
+          <p>确保手中有真实的、带 CPSC 认可资质的实验室出具的<strong>英文测试报告</strong>，以及对应的专属 CPC/GCC 证书，缺一不可。</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">🤝</div>
+        <div class="step-content">
+          <h4>第三步：确认货代/报关行 <span class="step-tag urgent">关键问题</span></h4>
+          <p>问你的货代/报关行一句话：<strong>"你们支持 ACE 系统的 PGA Message Set 及 CPSC eFiling 申报吗？"</strong> 如果不支持，赶紧换！</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-icon">🚀</div>
+        <div class="step-content">
+          <h4>第四步：抢跑备案 <span class="step-tag urgent">加急优先</span></h4>
+          <p>常规流程需要 <strong>5-7 个工作日</strong>，强烈建议开启加急通道，赶在大批卖家拥堵前完成电子备案，避免节点排队。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert-box green">
+      <div class="alert-icon">💡</div>
+      <div>
+        <strong>关键提醒：</strong>新规之下，<strong>合规是唯一的通行证</strong>。现在办证是成本，到时候被扣货是亏损。不要等到7月8日那天，看着柜子在港口产生巨额堆存费才后悔。
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY / CTA -->
+  <div class="summary-box">
+    <h3>🛳️ 立派国际物流 · 专业合规支持</h3>
+    <p>
+      立派国际物流持续跟进美线合规最新动态，为客户提供 CPSC eFiling、CPC/GCC 证书资质对接及 ACE 系统申报支持服务。
+      如需了解具体品类合规要求或申报流程，欢迎联系我们的合规专员。
+    </p>
+    <div style="margin-top: 8px; font-size: 13px; color: rgba(255,255,255,0.6);">
+      本文内容整理自 CPSC 官方法规及行业资讯，仅供参考，具体合规操作请以官方最新规定为准。
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>立派国际物流 · LIPAI INTERNATIONAL LOGISTICS</strong><br>
+  美线合规资讯 | CPSC eFiling 指南 | 本内容仅供参考，具体合规操作请以 CPSC 官方法规为准<br>
+  <span style="font-size:11px; opacity:0.5; margin-top:6px; display:block;">© 2026 立派国际物流</span>
+</footer>
+
+<script>
+  // Countdown to 2026-07-08
+  (function () {
+    function updateCountdown() {
+      var target = new Date('2026-07-08T00:00:00+08:00');
+      var now = new Date();
+      var diff = target - now;
+      var days = diff > 0 ? Math.floor(diff / 86400000) : 0;
+      var el = document.getElementById('daysLeft');
+      if (el) el.textContent = days;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+  })();
+</script>
+</body>
+</html>

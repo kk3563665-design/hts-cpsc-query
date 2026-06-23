@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>哪些产品需要 GCC？—— 美国CPSC一般合格证书完整指南</title>
+<style>
+  :root{
+    --bg:#f7f8fb; --card:#ffffff; --ink:#1a2332; --muted:#5b6b7f;
+    --line:#e3e8f0; --brand:#0b5cad; --brand-d:#08407a; --brand-l:#e8f1fb;
+    --accent:#e8740c; --accent-l:#fdf0e2; --ok:#1a8a4c; --ok-l:#e4f5ec;
+    --warn:#b8860b; --warn-l:#fbf3df; --danger:#c0392b; --danger-l:#fbeae7;
+    --shadow:0 1px 3px rgba(16,42,80,.06),0 4px 16px rgba(16,42,80,.04);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+  /* hero */
+  .hero{background:linear-gradient(135deg,#0b5cad 0%,#08407a 100%);color:#fff;
+    padding:48px 20px 40px;border-radius:0 0 18px 18px;margin-bottom:28px}
+  .hero h1{font-size:30px;font-weight:700;letter-spacing:-.5px;margin-bottom:10px}
+  .hero .sub{font-size:16px;opacity:.92;max-width:760px}
+  .hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+  .hero .meta span{background:rgba(255,255,255,.16);padding:4px 12px;border-radius:20px;
+    font-size:12.5px;backdrop-filter:blur(4px)}
+  .hero .logic{margin-top:20px;background:rgba(255,255,255,.12);
+    border-left:4px solid var(--accent);padding:14px 18px;border-radius:6px;font-size:15px}
+  .hero .logic b{color:#ffd494}
+  /* section */
+  section{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:28px 28px 24px;margin-bottom:22px;box-shadow:var(--shadow)}
+  h2{font-size:21px;font-weight:700;margin-bottom:6px;color:var(--brand-d);
+    display:flex;align-items:center;gap:10px}
+  h2 .n{background:var(--brand);color:#fff;font-size:13px;font-weight:600;
+    width:26px;height:26px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;flex-shrink:0}
+  h3{font-size:16.5px;font-weight:600;margin:20px 0 10px;color:var(--ink)}
+  .lead{color:var(--muted);margin-bottom:18px;font-size:14.5px}
+  p{margin-bottom:10px}
+  .note{background:var(--brand-l);border-left:3px solid var(--brand);
+    padding:12px 16px;border-radius:0 6px 6px 0;font-size:14px;margin:14px 0}
+  .warn{background:var(--warn-l);border-left:3px solid var(--warn);
+    padding:12px 16px;border-radius:0 6px 6px 0;font-size:14px;margin:14px 0}
+  .danger{background:var(--danger-l);border-left:3px solid var(--danger);
+    padding:12px 16px;border-radius:0 6px 6px 0;font-size:14px;margin:14px 0}
+  .ok{background:var(--ok-l);border-left:3px solid var(--ok);
+    padding:12px 16px;border-radius:0 6px 6px 0;font-size:14px;margin:14px 0}
+  code{background:#eef2f7;padding:1px 6px;border-radius:4px;font-size:13px;
+    font-family:"SF Mono",Consolas,monospace;color:var(--brand-d)}
+  /* decision svg */
+  .decision{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;
+    padding:20px;margin:16px 0;overflow-x:auto}
+  /* table controls */
+  .ctrl{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  .ctrl input[type=text]{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--line);
+    border-radius:8px;font-size:14px;outline:none;transition:border .15s}
+  .ctrl input:focus{border-color:var(--brand)}
+  .sel{padding:8px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;
+    background:#fff;cursor:pointer;color:var(--ink)}
+  .count{font-size:13px;color:var(--muted);white-space:nowrap}
+  /* table */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  thead th{background:#f0f4fa;text-align:left;padding:11px 12px;font-weight:600;
+    color:var(--brand-d);border-bottom:2px solid var(--line);position:sticky;top:0;
+    cursor:pointer;white-space:nowrap;user-select:none}
+  thead th:hover{background:#e6eef7}
+  thead th .arr{font-size:10px;color:var(--muted);margin-left:4px}
+  tbody td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:hover{background:#f7faff}
+  tbody tr:last-child td{border-bottom:none}
+  .cat{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11.5px;
+    font-weight:600;white-space:nowrap}
+  .cat-home{background:#e8f1fb;color:#0b5cad}
+  .cat-fire{background:#fbeae7;color:#c0392b}
+  .cat-elec{background:#fbf3df;color:#b8860b}
+  .cat-child{background:#f3eafb;color:#6c3ec0}
+  .cat-chem{background:#e4f5ec;color:#1a8a4c}
+  .cat-pkg{background:#f0eef7;color:#4a3a8c}
+  .cat-sport{background:#e6f7f4;color:#0a7a6b}
+  .cat-other{background:#eef1f4;color:#5b6b7f}
+  .cfr{font-family:"SF Mono",Consolas,monospace;font-size:12.5px;color:var(--brand-d);
+    white-space:nowrap}
+  .exempt{color:var(--warn);font-size:11.5px;margin-top:3px}
+  a.lk{color:var(--brand);text-decoration:none;border-bottom:1px dotted var(--brand)}
+  a.lk:hover{border-bottom-style:solid}
+  /* compare grid */
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+  .cmp .card{border:1px solid var(--line);border-radius:10px;padding:18px}
+  .cmp .gcc{border-top:4px solid var(--brand)}
+  .cmp .cpc{border-top:4px solid var(--accent)}
+  .cmp .card h4{font-size:15px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+  .cmp .card .badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600}
+  .cmp .gcc .badge{background:var(--brand-l);color:var(--brand-d)}
+  .cmp .cpc .badge{background:var(--accent-l);color:var(--accent)}
+  .cmp ul{list-style:none;padding:0}
+  .cmp li{padding:6px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+  .cmp li:last-child{border-bottom:none}
+  .cmp li b{color:var(--ink)}
+  /* factors */
+  .factors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0}
+  .factor{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:16px}
+  .factor .ic{font-size:22px;margin-bottom:8px}
+  .factor h4{font-size:14px;margin-bottom:6px;color:var(--brand-d)}
+  .factor p{font-size:13px;color:var(--muted);margin:0}
+  /* elements */
+  .elems{counter-reset:el;margin:16px 0}
+  .elem{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .elem:last-child{border-bottom:none}
+  .elem::before{counter-increment:el;content:counter(el);background:var(--brand);color:#fff;
+    width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-weight:600;font-size:13px;flex-shrink:0}
+  .elem .body h4{font-size:14.5px;margin-bottom:3px}
+  .elem .body p{font-size:13.5px;color:var(--muted);margin:0}
+  /* biz guide */
+  .biz{background:linear-gradient(135deg,#fdf0e2 0%,#fbe6d0 100%);
+    border:1px solid #f0c896;border-radius:12px;padding:24px;margin:16px 0}
+  .biz h3{color:var(--accent);margin-top:0}
+  .biz table{margin-top:12px;background:#fff}
+  /* footer */
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:24px 0;
+    border-top:1px solid var(--line);margin-top:30px}
+  .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:14px 0}
+  .res a{display:block;background:#fbfcfe;border:1px solid var(--line);border-radius:8px;
+    padding:12px 14px;text-decoration:none;color:var(--ink);font-size:13.5px;transition:all .15s}
+  .res a:hover{border-color:var(--brand);background:#f7faff;transform:translateY(-1px)}
+  .res a .t{font-weight:600;color:var(--brand-d);display:block;margin-bottom:2px}
+  .res a .u{font-size:11.5px;color:var(--muted);word-break:break-all}
+  @media(max-width:680px){
+    .cmp{grid-template-columns:1fr}
+    .hero{padding:32px 16px 28px}
+    .hero h1{font-size:23px}
+    section{padding:20px 16px}
+    h2{font-size:18px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap" style="padding:0">
+    <h1>哪些产品需要 GCC？</h1>
+    <div class="sub">美国 CPSC「一般合格证书」(General Certificate of Conformity) 完整指南 ——
+      判断逻辑、39 条强制法规清单、测试要求与实操指引</div>
+    <div class="meta">
+      <span>数据来源：cpsc.gov 官方</span>
+      <span>法规清单更新：2024-08-08</span>
+      <span>适用：出口美国的非儿童类消费品</span>
+    </div>
+    <div class="logic">
+      <b>核心判断逻辑（一句话）：</b>产品受 CPSC 强制性法规约束 → 需要 GCC；
+      不受任何强制法规约束 → 不需要 GCC。是否为儿童产品决定走 <b>CPC</b> 还是 <b>GCC</b>。
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- 1. 核心判断逻辑 -->
+<section>
+  <h2><span class="n">1</span>核心判断逻辑：先回答三个问题</h2>
+  <p class="lead">不要一上来就问"我的产品要不要 GCC"。按下面三个问题顺序判断，答案自然浮现。</p>
+
+  <div class="decision">
+    <svg viewBox="0 0 1000 470" width="100%" style="min-width:760px" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="#5b6b7f"/>
+        </marker>
+      </defs>
+      <!-- Q1 -->
+      <rect x="380" y="10" width="240" height="56" rx="28" fill="#0b5cad"/>
+      <text x="500" y="34" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">问题 1</text>
+      <text x="500" y="52" text-anchor="middle" fill="#fff" font-size="13">产品是消费品吗？</text>
+      <line x1="430" y1="66" x2="260" y2="120" stroke="#5b6b7f" stroke-width="1.5" marker-end="url(#ar)"/>
+      <line x1="570" y1="66" x2="740" y2="120" stroke="#5b6b7f" stroke-width="1.5" marker-end="url(#ar)"/>
+      <text x="320" y="95" text-anchor="middle" fill="#c0392b" font-size="12">否</text>
+      <text x="680" y="95" text-anchor="middle" fill="#1a8a4c" font-size="12">是</text>
+      <!-- 否 -->
+      <rect x="160" y="120" width="200" height="60" rx="8" fill="#fbeae7" stroke="#c0392b" stroke-width="1.5"/>
+      <text x="260" y="146" text-anchor="middle" fill="#c0392b" font-size="13" font-weight="600">不适用 CPSC 管辖</text>
+      <text x="260" y="164" text-anchor="middle" fill="#c0392b" font-size="11.5">医疗器械/食品/汽车/烟草等归其他机构</text>
+      <!-- 是 -> Q2 -->
+      <rect x="640" y="120" width="240" height="56" rx="28" fill="#0b5cad"/>
+      <text x="760" y="144" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">问题 2</text>
+      <text x="760" y="162" text-anchor="middle" fill="#fff" font-size="13">主要为 12 岁或以下儿童使用？</text>
+      <line x1="690" y1="176" x2="500" y2="230" stroke="#5b6b7f" stroke-width="1.5" marker-end="url(#ar)"/>
+      <line x1="830" y1="176" x2="900" y2="230" stroke="#5b6b7f" stroke-width="1.5" marker-end="url(#ar)"/>
+      <text x="575" y="205" text-anchor="middle" fill="#e8740c" font-size="12">是（儿童产品）</text>
+      <text x="880" y="205" text-anchor="middle" fill="#0b5cad" font-size="12">否（一般用途）</text>
+      <!-- CPC 路径 -->
+      <rect x="380" y="230" width="240" height="70" rx="10" fill="#fdf0e2" stroke="#e8740c" stroke-width="1.5"/>
+      <text x="500" y="254" text-anchor="middle" fill="#e8740c" font-size="14" font-weight="700">走 CPC 路径</text>
+      <text x="500" y="272" text-anchor="middle" fill="#5b3a0c" font-size="11.5">必须第三方实验室测试</text>
+      <text x="500" y="288" text-anchor="middle" fill="#5b3a0c" font-size="11.5">（CPSC 认可实验室）</text>
+      <!-- GCC 路径 -->
+      <rect x="780" y="230" width="220" height="70" rx="10" fill="#e8f1fb" stroke="#0b5cad" stroke-width="1.5"/>
+      <text x="890" y="254" text-anchor="middle" fill="#0b5cad" font-size="14" font-weight="700">走 GCC 路径</text>
+      <text x="890" y="272" text-anchor="middle" fill="#08407a" font-size="11.5">第一方测试或任何合格实验室</text>
+      <text x="890" y="288" text-anchor="middle" fill="#08407a" font-size="11.5">（不强制第三方）</text>
+      <!-- Q3 指向 GCC -->
+      <line x1="890" y1="300" x2="890" y2="340" stroke="#5b6b7f" stroke-width="1.5" marker-end="url(#ar)"/>
+      <rect x="770" y="340" width="240" height="56" rx="28" fill="#0b5cad"/>
+      <text x="890" y="362" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">问题 3</text>
+      <text x="890" y="380" text-anchor="middle" fill="#fff" font-size="13">产品受 CPSC 强制法规约束？</text>
+      <line x1="830" y1="396" x2="640" y2="430" stroke="#5b6b7f" stroke-width="1.5" marker-end="url(#ar)"/>
+      <line x1="950" y1="396" x2="980" y2="430" stroke="#5b6b7f" stroke-width="1.5" marker-end="url(#ar)"/>
+      <text x="710" y="420" text-anchor="middle" fill="#1a8a4c" font-size="12">是</text>
+      <text x="975" y="420" text-anchor="middle" fill="#c0392b" font-size="12">否</text>
+      <!-- 结果 -->
+      <rect x="540" y="424" width="200" height="42" rx="8" fill="#1a8a4c"/>
+      <text x="640" y="450" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">✓ 必须出具 GCC</text>
+      <rect x="900" y="424" width="180" height="42" rx="8" fill="#5b6b7f"/>
+      <text x="990" y="450" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">✗ 无需 GCC</text>
+    </svg>
+  </div>
+
+  <div class="note">
+    <b>关键澄清：</b>不是所有消费品都要 GCC。只有当产品落入 CPSC 强制性法规（标准/禁令/规则）的约束范围时，才需要 GCC。
+    CPSC 官方维护着一份"需要 GCC 的法规清单"（见第 4 节，共 39 条），如果产品不在这份清单覆盖的范围内，就不需要出具 GCC。
+  </div>
+</section>
+
+<!-- 2. 什么是 GCC -->
+<section>
+  <h2><span class="n">2</span>什么是 GCC？谁必须出具？</h2>
+  <p><b>GCC（General Certificate of Conformity，一般合格证书）</b>是美国消费品安全委员会（CPSC）要求的一种书面合规证明文件。
+  它由<b>美国国内制造商</b>或<b>进口商</b>出具，证明其一般用途产品（即非儿童产品）符合所有适用的 CPSC 消费品安全规则。</p>
+
+  <h3>法律依据</h3>
+  <p>《消费品安全法》（CPSA）第 14(a) 条，编入 <code>16 CFR Part 1110</code>。
+  该条款要求：受 CPSC 强制性规则、禁令、标准或法规约束的一般用途产品的国内制造商和进口商，必须基于<b>测试</b>或<b>合理测试程序</b>（reasonable testing program），在书面 GCC 中证明其产品合规。</p>
+
+  <div class="cmp">
+    <div class="card gcc">
+      <h4>GCC（一般合格证书）<span class="badge">一般用途产品</span></h4>
+      <ul>
+        <li><b>适用对象：</b>非主要为 12 岁或以下儿童设计的消费品</li>
+        <li><b>测试要求：</b>第一方测试 <b>或</b> 任何合格实验室测试（不强制第三方）</li>
+        <li><b>谁出具：</b>美国国内制造商 / 进口商</li>
+        <li><b>依据：</b>合理测试程序（reasonable testing program）</li>
+        <li><b>语言：</b>必须英文</li>
+        <li><b>更新：</b>材料变更时须重新测试出证</li>
+      </ul>
+    </div>
+    <div class="card cpc">
+      <h4>CPC（儿童产品证书）<span class="badge">儿童产品</span></h4>
+      <ul>
+        <li><b>适用对象：</b>主要为 12 岁或以下儿童设计/使用的消费品</li>
+        <li><b>测试要求：</b>必须由 CPSC 认可的第三方实验室测试</li>
+        <li><b>谁出具：</b>美国国内制造商 / 进口商（基于第三方报告）</li>
+        <li><b>依据：</b>第三方测试报告</li>
+        <li><b>语言：</b>必须英文</li>
+        <li><b>更新：</b>材料变更 + 定期测试（通常每年）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warn">
+    <b>注意"进口商"责任：</b>对于海外制造、进口到美国的产品，<b>进口商</b>是 GCC 的出具方和合规责任人。
+    这意味着中国出口商虽然不直接出 GCC，但美国买家（进口商）会要求你提供测试报告以便其出具 GCC。
+    实务中，出口商通常需要先做完测试，把报告随货提供给进口商。
+  </div>
+</section>
+
+<!-- 3. 儿童产品 vs 一般用途产品 -->
+<section>
+  <h2><span class="n">3</span>关键前置判断：儿童产品 vs 一般用途产品</h2>
+  <p class="lead">这一步决定你走 CPC 还是 GCC —— 判断错了，整个合规路径都会错。CPSC 依据以下四个因素综合判定。</p>
+
+  <div class="factors">
+    <div class="factor">
+      <div class="ic">🏷️</div>
+      <h4>① 制造商意图声明</h4>
+      <p>产品标签上关于预期用途的声明（前提是声明合理）。不能仅靠贴标签规避——必须与实际使用模式一致。</p>
+    </div>
+    <div class="factor">
+      <div class="ic">📦</div>
+      <h4>② 包装/展示/广告表述</h4>
+      <p>包装、文字、插图、说明书、广告中是否表述为适合 12 岁或以下儿童使用。明示和暗示都算，醒目程度会被权衡。</p>
+    </div>
+    <div class="factor">
+      <div class="ic">👥</div>
+      <h4>③ 消费者普遍认知</h4>
+      <p>消费者是否普遍认为该产品供 12 岁或以下儿童使用。会考虑商店类型（玩具店 vs 体育用品店）和货架位置。</p>
+    </div>
+    <div class="factor">
+      <div class="ic">📋</div>
+      <h4>④ 年龄判定指南</h4>
+      <p>CPSC 工作人员 2020 年发布的《Age Determination Guidelines》。儿童特征越多（小尺寸、鲜艳色、卡通主题、游戏价值）越可能被判定为儿童产品。</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>"primarily"（主要）是关键词。</b>一个产品即使对儿童有吸引力，只要 12 岁以上人群同样可能或更可能使用它，就是一般用途产品。
+    反之，若吸引力随年龄递减（主要吸引低龄儿童），则更可能是儿童产品。
+  </div>
+
+  <h3>珠宝/配饰的专门判定（与你的业务直接相关）</h3>
+  <div class="biz">
+    <table class="tbl-wrap" style="border:none">
+      <thead><tr><th style="width:50%">判定为<b style="color:#e8740c">儿童珠宝</b>（走 CPC）</th>
+        <th style="width:50%">判定为<b style="color:#0b5cad">成人珠宝</b>（走 GCC / 无需认证）</th></tr></thead>
+      <tbody>
+        <tr><td>按儿童尺寸制作</td><td>成人尺寸</td></tr>
+        <tr><td>儿童主题装饰（卡通、动物、字母表等）</td><td>成人款式设计</td></tr>
+        <tr><td>面向儿童营销、包装、定价</td><td>面向成人营销</td></tr>
+        <tr><td>具有"游戏价值"（可把玩、可收集成套）</td><td>纯粹装饰/佩戴功能</td></tr>
+        <tr><td>低成本、塑料/合金材质、色彩鲜艳</td><td>贵金属/宝石、成人化设计</td></tr>
+        <tr><td colspan="2" style="background:#fff8ec">
+          <b>⚠️ 玩具珠宝</b>（toy jewelry）：若被判定为玩具，还需额外符合 ASTM F963 玩具安全标准（16 CFR Part 1250），走 CPC。
+          <b>成人珠宝</b>即使某些特征对儿童有吸引力，仅"吸引力"本身不会将其转化为儿童珠宝。</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4. 完整法规清单 -->
+<section>
+  <h2><span class="n">4</span>需要 GCC 的 39 条强制法规完整清单</h2>
+  <p class="lead">
+    以下清单来自 CPSC 官方页面《Rules Requiring a General Certificate of Conformity (GCC)》，
+    更新于 2024 年 8 月 8 日。可搜索、可按类别筛选、可点击法规编号查看原文。
+    只要你的产品落入下列任一法规的适用范围，就需要出具 GCC。</p>
+
+  <div class="ctrl">
+    <input type="text" id="search" placeholder="🔍 搜索产品名称、法规编号或关键词（如：服装、电池、1610）...">
+    <select class="sel" id="filterCat">
+      <option value="">全部类别</option>
+      <option value="home">🏠 家居与家具</option>
+      <option value="fire">🔥 燃烧/火源相关</option>
+      <option value="elec">⚡ 电器与电子</option>
+      <option value="child">🧸 儿童相关（一般用途）</option>
+      <option value="chem">🧪 化学与材料</option>
+      <option value="pkg">📦 包装</option>
+      <option value="sport">⚽ 运动与户外</option>
+      <option value="other">⚙️ 其他</option>
+    </select>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="tbl-wrap">
+    <table id="rulesTable">
+      <thead>
+        <tr>
+          <th data-sort="product">产品/问题类别 <span class="arr"></span></th>
+          <th data-sort="cfr">法规编号 <span class="arr"></span></th>
+          <th data-sort="cat">类别 <span class="arr"></span></th>
+          <th>说明 / 豁免</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="warn">
+    <b>关于带 [1] 标记的"禁令类"法规：</b>CPSC 在 78 FR 28080 中说明，部分禁令禁止的是整个产品类别（无可认证产品剩余），
+    部分禁令只禁止子类别（仍需认证）。清单中标注 [1] 的项目属于后者，仍需出具 GCC。
+  </div>
+  <div class="note">
+    <b>关于带 [2][3] 标记的执法裁量：</b>
+    [2] 家用冰箱若显示合规安全认证标志，CPSC 不强制执行认证要求（84 FR 37767）；
+    [3] 依 16 CFR § 1610.1(d) 豁免测试的成人服装，CPSC 不强制执行 GCC 要求（81 FR 12587）——
+    但<b>儿童服装不享受此豁免</b>。
+  </div>
+</section>
+
+<!-- 5. 测试要求 -->
+<section>
+  <h2><span class="n">5</span>测试要求：GCC 的"合理测试程序"</h2>
+  <p>GCC 与 CPC 最大的区别在于测试要求。GCC 不强制使用第三方实验室，但必须有<b>测试或合理测试程序</b>作为支撑。</p>
+
+  <h3>什么是"合理测试程序"（Reasonable Testing Program）</h3>
+  <p>CPSC 将其定义为：<b>足以提供合理保证</b>，证明产品符合所有适用安全规则的测试程序。一个合格的合理测试程序通常包含以下要素：</p>
+
+  <div class="factors">
+    <div class="factor">
+      <div class="ic">📋</div>
+      <h4>① 产品规格描述</h4>
+      <p>明确产品的材料、尺寸、设计等规格，作为测试和后续比对的基准。</p>
+    </div>
+    <div class="factor">
+      <div class="ic">🧪</div>
+      <h4>② 测试协议</h4>
+      <p>确定要测试哪些项目、用什么方法/标准、抽样方案、合格判定准则。</p>
+    </div>
+    <div class="factor">
+      <div class="ic">🏭</div>
+      <h4>③ 生产环节测试</h4>
+      <p>在生产过程中进行足够频繁的测试，确保持续合规（非仅测一次）。</p>
+    </div>
+    <div class="factor">
+      <div class="ic">📝</div>
+      <h4>④ 记录保存</h4>
+      <p>保留所有测试记录，CPSC 要求时必须能提供。记录是合理测试程序存在的证据。</p>
+    </div>
+  </div>
+
+  <h3>第一方测试 vs 第三方测试</h3>
+  <div class="cmp">
+    <div class="card gcc">
+      <h4>GCC 允许的测试方式 <span class="badge">灵活</span></h4>
+      <ul>
+        <li><b>第一方测试：</b>制造商自己测（须具备能力）</li>
+        <li><b>任何合格实验室：</b>不限于 CPSC 认可实验室</li>
+        <li><b>组件供应商测试：</b>可依赖供应商已做的测试（有条件）</li>
+        <li><b>无需逐批测试：</b>但须有合理测试程序保障持续合规</li>
+      </ul>
+    </div>
+    <div class="card cpc">
+      <h4>CPC 的测试方式 <span class="badge">严格</span></h4>
+      <ul>
+        <li><b>必须第三方：</b>CPSC 认可实验室（CPSC-accepted）</li>
+        <li><b>不可第一方：</b>制造商自己测的报告不被接受</li>
+        <li><b>逐批/定期：</b>材料变更须重测，另有定期测试要求</li>
+        <li><b>实验室可查：</b>cpsc.gov/labsearch 可查询认可实验室</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>何时需要重新测试/重新出证</h3>
+  <ul style="padding-left:20px;margin:10px 0">
+    <li><b>材料变更（material change）：</b>产品设计、材料、生产工艺或供应商发生可能影响合规的变更时，必须重新测试并出具新 GCC。</li>
+    <li><b>材料变更只涉及某组件：</b>通常只需重测受影响的组件，不必重测整个产品。</li>
+    <li><b>无变更：</b>GCC 不需要每次出货都更新，但合理测试程序应持续运行。</li>
+  </ul>
+
+  <div class="ok">
+    <b>实务建议：</b>虽然 GCC 不强制第三方测试，但<b>强烈建议</b>出口商使用有资质的第三方实验室出报告。
+    理由：(1) 美国进口商通常要求第三方报告才肯出 GCC；(2) 海关查验时第三方报告更具公信力；
+    (3) 万一被 CPSC 追问，第三方报告能证明你尽了合理努力。
+  </div>
+</section>
+
+<!-- 6. GCC 7 大必填要素 -->
+<section>
+  <h2><span class="n">6</span>GCC 必须包含的 7 大要素</h2>
+  <p class="lead">法律没有规定固定模板，但 GCC 必须包含以下 7 个要素，缺一不可。CPSC 提供了阿司匹林包装和床垫两个示例供参考。</p>
+
+  <div class="elems">
+    <div class="elem"><div class="body">
+      <h4>产品标识</h4>
+      <p>描述本证书覆盖的产品，详细到能将证书与对应产品一一匹配，且不覆盖其他产品。</p>
+    </div></div>
+    <div class="elem"><div class="body">
+      <h4>法规引用</h4>
+      <p>列出产品所认证的每一项 CPSC 安全规则（见第 4 节清单）。若有豁免使某项测试不必要，须在对应规则下注明豁免引用。</p>
+    </div></div>
+    <div class="elem"><div class="body">
+      <h4>认证方信息</h4>
+      <p>出具 GCC 的国内制造商或进口商的名称、完整通讯地址、电话。</p>
+    </div></div>
+    <div class="elem"><div class="body">
+      <h4>记录保存联系人</h4>
+      <p>负责保存测试记录的人员的名称、地址、邮箱、电话。此人不必来自认证方公司，但认证方有责任在被要求时提供测试报告。</p>
+    </div></div>
+    <div class="elem"><div class="body">
+      <h4>制造日期与地点</h4>
+      <p>制造日期至少到月和年（连续批次可填起始月年）；制造地点至少到城市（或行政区）、州（如适用）、国家。同一城市多厂须填街道地址。</p>
+    </div></div>
+    <div class="elem"><div class="body">
+      <h4>测试日期与地点</h4>
+      <p>测试或测试报告的日期，以及测试地点。</p>
+    </div></div>
+    <div class="elem"><div class="body">
+      <h4>第三方实验室信息</h4>
+      <p>若使用了第三方实验室，须提供名称、地址、电话。由于 GCC 不强制第三方，此项可填"N/A"——但若实际用了第三方报告作为出证依据，则必须填写。</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- 7. 实操指引 -->
+<section>
+  <h2><span class="n">7</span>实操指引：耳环与服装配饰出口美国</h2>
+
+  <div class="biz">
+    <h3 style="margin-top:0">耳环（珠宝首饰）</h3>
+    <table class="tbl-wrap" style="border:none">
+      <thead><tr><th style="width:30%">产品类型</th><th style="width:25%">合规路径</th><th>适用法规与说明</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>成人耳环</b><br>（成人尺寸/款式/营销）</td>
+          <td><span class="cat cat-other">通常无需 GCC</span></td>
+          <td>成人珠宝本身不在 CPSC 39 条 GCC 法规清单中。<b>除非</b>产品含铅涂层（→ <code>16 CFR Part 1303</code>）或含纽扣电池（→ Reese's Law）才需 GCC。
+          但需注意：<b>铅含量</b>和<b>邻苯二甲酸酯</b>若涉及儿童产品则受管。</td>
+        </tr>
+        <tr>
+          <td><b>儿童耳环</b><br>（儿童尺寸/主题/营销，或 12 岁以下使用）</td>
+          <td><span class="cat cat-child">走 CPC</span></td>
+          <td>须 CPSC 认可第三方实验室测试。适用：<code>16 CFR Part 1303</code>（含铅涂层）、<code>16 CFR Part 1307</code>（邻苯二甲酸酯）、
+          <code>15 U.S.C. § 1278a</code>（总铅含量）。若属"玩具珠宝"还须 ASTM F963。</td>
+        </tr>
+        <tr>
+          <td><b>含纽扣电池的发光耳环</b></td>
+          <td><span class="cat cat-elec">需 GCC</span></td>
+          <td><code>15 U.S.C. § 2056e</code> + <code>16 CFR § 1263.3/.4</code>（Reese's Law，纽扣电池儿童安全包装）。
+          <b>注意：</b>此法规在 GCC 清单中，无论成人还是儿童产品都受管。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="biz">
+    <h3 style="margin-top:0">服装与纺织品配饰</h3>
+    <table class="tbl-wrap" style="border:none">
+      <thead><tr><th style="width:30%">产品类型</th><th style="width:25%">合规路径</th><th>适用法规与说明</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>成人服装</b><br>（围巾、披肩、普通成衣）</td>
+          <td><span class="cat cat-other">有条件豁免</span></td>
+          <td>受 <code>16 CFR Part 1610</code>（服装纺织品可燃性）约束 → 需要 GCC。
+          但依 <code>§ 1610.1(d)</code> 豁免测试的款式（如全棉、全聚酯、某些密织面料），CPSC 不强制执行 GCC（81 FR 12587）。
+          <b>建议：</b>仍做测试并出具 GCC，标注豁免引用，更稳妥。</td>
+        </tr>
+        <tr>
+          <td><b>儿童服装</b><br>（12 岁或以下）</td>
+          <td><span class="cat cat-child">走 CPC</span></td>
+          <td>必须第三方测试 <code>16 CFR Part 1610</code>。儿童睡衣还须 <code>Part 1615/1616</code>。不享受成人豁免。</td>
+        </tr>
+        <tr>
+          <td><b>乙烯基塑料薄膜制品</b><br>（雨衣、防水围裙等）</td>
+          <td><span class="cat cat-fire">需 GCC</span></td>
+          <td><code>16 CFR Part 1611</code>（乙烯基塑料薄膜可燃性）。无豁免。</td>
+        </tr>
+        <tr>
+          <td><b>地毯/小地毯</b><br>（围巾式地垫、门垫等）</td>
+          <td><span class="cat cat-fire">需 GCC</span></td>
+          <td>大于 6ft×24sqft → <code>Part 1630</code>；更小 → <code>Part 1631</code>。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="danger">
+    <b>⚠️ 关键风险提示：</b>
+    <ol style="margin:8px 0 0 18px">
+      <li><b>产品定位决定一切。</b>"儿童款"耳环走 CPC（成本高、周期长），"成人款"可能无需认证。
+      你的营销话术、包装设计、产品尺寸都会被 CPSC 审查。<b>不要为了规避 CPC 而把明显面向儿童的产品标为"成人"</b>——CPSC 会穿透标签看实质。</li>
+      <li><b>含铅涂层是常见坑。</b>廉价金属耳环的表面涂层/油漆可能含铅 → 触发 <code>16 CFR Part 1303</code> → 需要 GCC（成人）或 CPC（儿童）。
+      建议所有金属饰品都测铅。</li>
+      <li><b>纽扣电池是 2023 年新规。</b>Reese's Law 已生效，含纽扣电池的产品（含发光饰品）无论成人儿童都受管，需儿童安全包装。</li>
+      <li><b>海关查验。</b>CPSC 与 CBP（海关）联合查验，无 GCC/CPC 的货物可能被扣留、销毁或退运。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 8. 常见误区 -->
+<section>
+  <h2><span class="n">8</span>常见误区</h2>
+
+  <div class="danger" style="margin-top:0">
+    <b>误区 1：</b>"所有消费品都要 GCC。"
+    <br>✗ 错。只有受 CPSC 39 条强制法规约束的产品才需要。大量产品（如普通五金、文具、厨具中不含电池/不涉可燃性的）不需要 GCC。
+  </div>
+  <div class="warn">
+    <b>误区 2：</b>"GCC 必须用 CPSC 认可的第三方实验室。"
+    <br>✗ 错。这是 CPC 的要求。GCC 可用第一方测试或任何合格实验室。但实务中第三方报告更被认可。
+  </div>
+  <div class="warn">
+    <b>误区 3：</b>"贴个'成人使用'标签就能避免儿童产品认定。"
+    <br>✗ 错。标签只是四因素之一，且必须与产品实质一致。CPSC 会综合判断尺寸、主题、营销、消费者认知。
+  </div>
+  <div class="warn">
+    <b>误区 4：</b>"成人服装豁免测试就不用管 1610 了。"
+    <br>△ 部分对。依 81 FR 12587，豁免测试的成人服装 CPSC 不强制执行 GCC。但<b>儿童服装不豁免</b>，且豁免清单有严格范围，建议核实你的面料是否真在豁免内。
+  </div>
+  <div class="ok">
+    <b>误区 5：</b>"GCC 出一次就一直有效。"
+    <br>✗ 错。材料变更须重测重出。虽无强制定期测试，但合理测试程序应持续运行。
+  </div>
+</section>
+
+<!-- 9. 官方资源 -->
+<section>
+  <h2><span class="n">9</span>官方资源与延伸阅读</h2>
+  <div class="res">
+    <a href="https://www.cpsc.gov/Business--Manufacturing/Testing-Certification/General-Certificate-of-Conformity" target="_blank">
+      <span class="t">GCC 主页（定义、要素、示例）</span>
+      <span class="u">cpsc.gov/.../General-Certificate-of-Conformity</span>
+    </a>
+    <a href="https://www.cpsc.gov/Business--Manufacturing/Testing-Certification/Lab-Accreditation/Rules-Requiring-a-General-Certificate-of-Conformity" target="_blank">
+      <span class="t">需要 GCC 的法规清单（官方表格）</span>
+      <span class="u">cpsc.gov/.../Rules-Requiring-a-General-Certificate-of-Conformity</span>
+    </a>
+    <a href="https://www.cpsc.gov/FAQ/GCC" target="_blank">
+      <span class="t">GCC 常见问题（含合理测试程序）</span>
+      <span class="u">cpsc.gov/FAQ/GCC</span>
+    </a>
+    <a href="https://www.cpsc.gov/Business--Manufacturing/Testing-Certification/Lab-Accreditation/Rules-Requiring-Third-Party-Testing" target="_blank">
+      <span class="t">需要 CPC 的法规清单（对比参考）</span>
+      <span class="u">cpsc.gov/.../Rules-Requiring-Third-Party-Testing</span>
+    </a>
+    <a href="https://www.cpsc.gov/Business--Manufacturing/Business-Education/childrens-products" target="_blank">
+      <span class="t">儿童产品判定指南</span>
+      <span class="u">cpsc.gov/.../childrens-products</span>
+    </a>
+    <a href="https://www.cpsc.gov/cgi-bin/labsearch/" target="_blank">
+      <span class="t">CPSC 认可实验室查询</span>
+      <span class="u">cpsc.gov/cgi-bin/labsearch</span>
+    </a>
+    <a href="https://www.ecfr.gov/current/title-16/chapter-II/subchapter-B/part-1110" target="_blank">
+      <span class="t">16 CFR Part 1110（认证法规原文）</span>
+      <span class="u">ecfr.gov/.../part-1110</span>
+    </a>
+    <a href="https://www.cpsc.gov/Business--Manufacturing/Business-Education/Business-Guidance/Clothing" target="_blank">
+      <span class="t">服装可燃性业务指南（1610 等）</span>
+      <span class="u">cpsc.gov/.../Clothing</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  本报告基于 CPSC 官方公开信息整理，法规清单更新至 2024-08-08。<br>
+  仅供合规参考，不构成法律意见。具体产品合规请咨询 CPSC 合规办公室或专业律师。
+</footer>
+
+</div>
+
+<script>
+// 39 条 GCC 法规数据
+const RULES = [
+  {product:"全地形车 (ATV)", cfr:"16 CFR Part 1420", cat:"sport", catName:"运动与户外",
+   note:"全地形车安全标准"},
+  {product:"建筑玻璃材料", cfr:"16 CFR Part 1201", cat:"home", catName:"家居与家具",
+   note:"建筑用玻璃安全标准"},
+  {product:"成人便携式床栏", cfr:"16 CFR Part 1270", cat:"home", catName:"家居与家具",
+   note:"成人用床栏安全标准（非儿童床栏）"},
+  {product:"人造余烬材料 [1]", cfr:"16 CFR Part 1305", cat:"fire", catName:"燃烧/火源相关",
+   note:"禁令类——含可燃性的人造余烬/灰烬装饰材料"},
+  {product:"自行车头盔", cfr:"16 CFR Part 1203", cat:"sport", catName:"运动与户外",
+   note:"自行车头盔安全标准"},
+  {product:"自行车", cfr:"16 CFR Part 1512", cat:"sport", catName:"运动与户外",
+   note:"自行车安全要求"},
+  {product:"双层床", cfr:"16 CFR Part 1213", cat:"home", catName:"家居与家具",
+   note:"双层床安全标准（成人/一般用途；儿童双层床走 CPC Part 1513）"},
+  {product:"纽扣电池或硬币电池", cfr:"15 U.S.C. § 2056e / 16 CFR § 1263", cat:"elec", catName:"电器与电子",
+   note:"Reese's Law——纽扣电池儿童安全包装，无论成人儿童产品均受管"},
+  {product:"地毯（大）", cfr:"16 CFR Part 1630", cat:"fire", catName:"燃烧/火源相关",
+   note:"大于 6ft 且面积大于 24sqft 的地毯表面可燃性"},
+  {product:"地毯（小）", cfr:"16 CFR Part 1631", cat:"fire", catName:"燃烧/火源相关",
+   note:"不超过 6ft 且面积不超过 24sqft 的小地毯可燃性"},
+  {product:"CB 天线", cfr:"16 CFR Part 1204", cat:"elec", catName:"电器与电子",
+   note:"公民频段天线安全标准"},
+  {product:"纤维素绝缘材料", cfr:"16 CFR Part 1209", cat:"home", catName:"家居与家具",
+   note:"建筑用纤维素绝缘材料可燃性/腐蚀性标准"},
+  {product:"香烟打火机", cfr:"16 CFR Part 1210", cat:"fire", catName:"燃烧/火源相关",
+   note:"打火机安全标准（儿童防护）"},
+  {product:"衣物储存单元（衣柜等）", cfr:"16 CFR Part 1261", cat:"home", catName:"家居与家具",
+   note:"衣物储物柜防倾倒安全标准（STURDY Act）"},
+  {product:"消费型修补化合物 [1]", cfr:"16 CFR Part 1304", cat:"chem", catName:"化学与材料",
+   note:"禁令类——含石棉的修补化合物"},
+  {product:"潜水棒及类似物品", cfr:"16 CFR § 1500.86(a)(7)/(8)", cat:"sport", catName:"运动与户外",
+   note:"禁令类——可膨胀潜水棒等危险物品"},
+  {product:"石膏板（干墙）", cfr:"15 U.S.C. § 2056c", cat:"home", catName:"家居与家具",
+   note:"问题干墙禁令（硫化氢释放标准）"},
+  {product:"烟花", cfr:"16 CFR Part 1507", cat:"fire", catName:"燃烧/火源相关",
+   note:"烟花安全标准（消费者用）"},
+  {product:"车库门开启器", cfr:"16 CFR Part 1211", cat:"home", catName:"家居与家具",
+   note:"车库门开启器安全标准"},
+  {product:"草坪飞镖 [1]", cfr:"16 CFR Part 1306", cat:"sport", catName:"运动与户外",
+   note:"禁令类——带尖锐尖端的草坪飞镖"},
+  {product:"液体尼古丁包装 (CNPPA)", cfr:"15 U.S.C. § 1472a", cat:"pkg", catName:"包装",
+   note:"儿童防开启包装要求（液体尼古丁）"},
+  {product:"磁铁（危险磁铁）", cfr:"16 CFR Part 1262", cat:"child", catName:"儿童相关（一般用途）",
+   note:"危险磁铁安全标准——虽常见于儿童误吞，但法规适用于一般用途产品"},
+  {product:"火柴盒/火柴书", cfr:"16 CFR Part 1202", cat:"fire", catName:"燃烧/火源相关",
+   note:"火柴安全标准"},
+  {product:"床垫和床垫垫", cfr:"16 CFR Part 1632", cat:"fire", catName:"燃烧/火源相关",
+   note:"床垫阴燃可燃性标准"},
+  {product:"床垫套装", cfr:"16 CFR Part 1633", cat:"fire", catName:"燃烧/火源相关",
+   note:"床垫明火可燃性标准"},
+  {product:"金属芯烛芯 [1]", cfr:"16 CFR § 1500.17(a)(13)", cat:"fire", catName:"燃烧/火源相关",
+   note:"禁令类——含铅的金属芯烛芯"},
+  {product:"多功能打火机", cfr:"16 CFR Part 1212", cat:"fire", catName:"燃烧/火源相关",
+   note:"多功能打火机安全标准（儿童防护）"},
+  {product:"含铅油漆及类似表面涂层 [1]", cfr:"16 CFR Part 1303", cat:"chem", catName:"化学与材料",
+   note:"含铅涂层禁令——铅含量超 0.009% 的涂层。金属饰品常见适用项"},
+  {product:"便携式燃油容器（火焰缓解装置）", cfr:"16 CFR Part 1461", cat:"fire", catName:"燃烧/火源相关",
+   note:"燃油容器须配火焰缓解装置"},
+  {product:"便携式燃油容器（特殊包装）", cfr:"16 CFR Part 1460", cat:"pkg", catName:"包装",
+   note:"儿童防护包装要求"},
+  {product:"手推式割草机", cfr:"16 CFR Part 1205", cat:"home", catName:"家居与家具",
+   note:"步行式电动割草机安全标准"},
+  {product:"冰箱门 [2]", cfr:"16 CFR Part 1750", cat:"home", catName:"家居与家具",
+   note:"冰箱门安全标准。<b>执法裁量：</b>显示合规安全认证标志的家用冰箱，CPSC 不强制执行认证要求"},
+  {product:"垃圾桶 [1]", cfr:"16 CFR Part 1301", cat:"home", catName:"家居与家具",
+   note:"禁令类——含极危险物质的垃圾桶"},
+  {product:"服装（穿着类）[3]", cfr:"16 CFR Part 1610", cat:"fire", catName:"燃烧/火源相关",
+   note:"服装纺织品可燃性标准。<b>执法裁量：</b>依 §1610.1(d) 豁免测试的成人服装不强制 GCC（81 FR 12587）。儿童服装不豁免"},
+  {product:"特殊包装 (PPPA)", cfr:"16 CFR Part 1700", cat:"pkg", catName:"包装",
+   note:"防毒包装法——某些危险物质须儿童防护包装"},
+  {product:"独立式泳池滑梯", cfr:"16 CFR Part 1207", cat:"sport", catName:"运动与户外",
+   note:"泳池滑梯安全标准"},
+  {product:"玩具、仿真和仿制枪械", cfr:"16 CFR Part 1272", cat:"child", catName:"儿童相关（一般用途）",
+   note:"仿真枪械标识标准（橙色枪口等）——属一般用途法规"},
+  {product:"乙烯基塑料薄膜", cfr:"16 CFR Part 1611", cat:"fire", catName:"燃烧/火源相关",
+   note:"用于服装的乙烯基塑料薄膜可燃性（雨衣、防水围裙等）"},
+  {product:"VGB 泳池与水疗安全法", cfr:"16 CFR Part 1450", cat:"sport", catName:"运动与户外",
+   note:"Virginia Graeme Baker 法——泳池排水盖防吸入要求"},
+];
+
+let sortKey='product', sortAsc=true;
+
+function render(list){
+  const tb=document.getElementById('tbody');
+  tb.innerHTML = list.map(r=>`
+    <tr>
+      <td><b>${r.product}</b></td>
+      <td><span class="cfr">${r.cfr}</span></td>
+      <td><span class="cat cat-${r.cat}">${r.catName}</span></td>
+      <td>${r.note}</td>
+    </tr>`).join('');
+  document.getElementById('count').textContent = `共 ${list.length} 条`;
+}
+
+function applyFilters(){
+  const q=document.getElementById('search').value.trim().toLowerCase();
+  const f=document.getElementById('filterCat').value;
+  let list = RULES.filter(r=>{
+    const okCat = !f || r.cat===f;
+    const okQ = !q || (r.product+r.cfr+r.note+r.catName).toLowerCase().includes(q);
+    return okCat && okQ;
+  });
+  list.sort((a,b)=>{
+    let x=a[sortKey], y=b[sortKey];
+    if(sortKey==='cfr'){x=a.cfr;y=b.cfr}
+    else if(sortKey==='cat'){x=a.catName;y=b.catName}
+    else{x=a.product;y=b.product}
+    return sortAsc ? String(x).localeCompare(y,'zh') : String(y).localeCompare(x,'zh');
+  });
+  render(list);
+}
+
+document.getElementById('search').addEventListener('input',applyFilters);
+document.getElementById('filterCat').addEventListener('change',applyFilters);
+document.querySelectorAll('thead th[data-sort]').forEach(th=>{
+  th.addEventListener('click',()=>{
+    const k=th.dataset.sort;
+    if(sortKey===k) sortAsc=!sortAsc; else {sortKey=k;sortAsc=true}
+    document.querySelectorAll('thead th .arr').forEach(a=>a.textContent='');
+    th.querySelector('.arr').textContent = sortAsc?'▲':'▼';
+    applyFilters();
+  });
+});
+
+applyFilters();
+</script>
+
+</body>
+</html>

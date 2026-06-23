@@ -118,6 +118,26 @@
     border:1px solid #f0c896;border-radius:12px;padding:24px;margin:16px 0}
   .biz h3{color:var(--accent);margin-top:0}
   .biz table{margin-top:12px;background:#fff}
+  /* site header */
+  .site-header{background:linear-gradient(135deg,#0f2557 0%,#1a3c6e 50%,#1e50a2 100%);
+    padding:0;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.25)}
+  .header-inner{max-width:1080px;margin:0 auto;padding:13px 20px;
+    display:flex;align-items:center;justify-content:space-between}
+  .logo-area{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .logo-icon{width:42px;height:42px;background:linear-gradient(135deg,#e84c3d,#f97316);
+    border-radius:10px;display:flex;align-items:center;justify-content:center;
+    font-size:22px;color:#fff;font-weight:900;flex-shrink:0}
+  .logo-text{color:#fff}
+  .logo-text .main{font-size:18px;font-weight:700;letter-spacing:1px}
+  .logo-text .sub{font-size:11px;color:rgba(255,255,255,.65);letter-spacing:2px;margin-top:1px}
+  .header-badge{background:var(--accent);color:#fff;font-size:12px;font-weight:600;
+    padding:4px 12px;border-radius:20px;letter-spacing:.5px;white-space:nowrap}
+  @media(max-width:680px){
+    .header-inner{padding:11px 16px}
+    .logo-text .main{font-size:15px}
+    .logo-text .sub{font-size:10px;letter-spacing:1px}
+    .header-badge{font-size:11px;padding:3px 10px}
+  }
   /* footer */
   footer{text-align:center;color:var(--muted);font-size:12.5px;padding:24px 0;
     border-top:1px solid var(--line);margin-top:30px}
@@ -137,6 +157,19 @@
 </style>
 </head>
 <body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo-area" href="index.html">
+      <div class="logo-icon">立</div>
+      <div class="logo-text">
+        <div class="main">立派国际物流&amp;KK知识库</div>
+        <div class="sub">LIPAI INTERNATIONAL LOGISTICS</div>
+      </div>
+    </a>
+    <div class="header-badge">⚡ 合规指南</div>
+  </div>
+</header>
 
 <div class="hero">
   <div class="wrap" style="padding:0">
